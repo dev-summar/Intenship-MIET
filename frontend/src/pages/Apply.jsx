@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { projectsAPI, applicationsAPI, uploadAPI } from '../api/services';
+import { projectsAPI, applicationsAPI } from '../api/services';
 import { useAuth } from '../context/AuthContext';
 import { TagsInput } from '../components/TagsInput';
 import { APPLY, ROUTES, PROJECTS, COMMON, AUTH } from '../constants/messages';
@@ -17,8 +17,6 @@ export function Apply() {
   const [sop, setSop] = useState('');
   const [skills, setSkills] = useState([]);
   const [resumeUrl, setResumeUrl] = useState('');
-  const [resumeFile, setResumeFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
 
   const { data: projectData, isLoading: projectLoading } = useQuery(
     ['project', projectId],
@@ -29,24 +27,13 @@ export function Apply() {
   const project = projectData?.data?.project;
 
   const submitMutation = useMutation(
-    async () => {
-      let finalResumeUrl = resumeUrl;
-      if (resumeFile) {
-        setUploading(true);
-        try {
-          const { data } = await uploadAPI.uploadResume(resumeFile);
-          if (data?.success && data?.data?.url) finalResumeUrl = data.data.url;
-        } finally {
-          setUploading(false);
-        }
-      }
-      return applicationsAPI.apply({
+    async () =>
+      applicationsAPI.apply({
         project: isGeneralApply ? null : projectId,
         sop,
         skills,
-        resumeUrl: finalResumeUrl || undefined,
-      });
-    },
+        resumeUrl: resumeUrl || undefined,
+      }),
     {
       onSuccess: (res) => {
         if (res?.data?.success) {
@@ -193,24 +180,15 @@ export function Apply() {
                 value={resumeUrl}
                 onChange={(e) => setResumeUrl(e.target.value)}
                 placeholder={APPLY.RESUME_PLACEHOLDER}
-                className="w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 mb-2"
-              />
-              <label className="block text-sm text-gray-500 mb-1">{APPLY.RESUME_UPLOAD}</label>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={(e) => setResumeFile(e.target.files?.[0] || null)}
-                className="w-full text-sm text-gray-500 file:mr-3 file:rounded-lg file:border-0 file:bg-primary-50 file:px-3 file:py-2 file:text-primary-700"
+                className="w-full rounded-xl border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
               />
             </div>
             <button
               type="submit"
-              disabled={submitMutation.isLoading || uploading}
+              disabled={submitMutation.isLoading}
               className="w-full rounded-lg bg-primary-600 py-2.5 text-sm font-semibold text-white hover:bg-primary-700 disabled:opacity-50"
             >
-              {submitMutation.isLoading || uploading
-                ? COMMON.LOADING
-                : APPLY.CONFIRM_SUBMIT}
+              {submitMutation.isLoading ? COMMON.LOADING : APPLY.CONFIRM_SUBMIT}
             </button>
           </form>
         </div>

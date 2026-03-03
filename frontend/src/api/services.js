@@ -37,13 +37,3 @@ export const homepageAPI = {
   get: () => axiosInstance.get('/homepage'),
   update: (data) => axiosInstance.put('/admin/homepage', data),
 };
-
-export const uploadAPI = {
-  uploadResume: (file) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    return axiosInstance.post('/upload', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
-  },
-};

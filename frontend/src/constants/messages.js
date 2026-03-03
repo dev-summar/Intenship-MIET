@@ -74,14 +74,11 @@ export const APPLY = {
   SKILLS_PLACEHOLDER: 'Add a skill and press Enter',
   RESUME_URL: 'Resume URL (optional)',
   RESUME_PLACEHOLDER: 'https://...',
-  RESUME_UPLOAD: 'Or upload resume (PDF, DOC)',
   CONFIRM_SUBMIT: 'Confirm and submit application',
   SUBMIT: 'Submit application',
   SUCCESS: 'Application submitted successfully',
   ALREADY_APPLIED: 'You have already applied to this project',
   PROJECT_CLOSED: 'This project is no longer open for applications',
-  UPLOAD_SUCCESS: 'Resume uploaded',
-  UPLOAD_ERROR: 'Resume upload failed',
 };
 
 export const STUDENT_DASHBOARD = {
