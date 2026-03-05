@@ -82,8 +82,8 @@
 
 .navbar-institutional .navbar-wordmark {
   font-family: 'Playfair Display', serif;
-  font-weight: 500;
-  font-size: 17px;
+  font-weight: 600;
+  font-size: 22px;
   color: var(--text);
   line-height: 1.2;
 }
@@ -273,6 +273,6 @@
 
 @media (max-width: 480px) {
   .navbar-institutional .navbar-wordmark {
-    font-size: 15px;
+    font-size: 18px;
   }
 }
