@@ -72,7 +72,7 @@ export const APPLY = {
   SOP_PLACEHOLDER: 'Describe your interest and how you fit this project...',
   SKILLS_LABEL: 'Your skills',
   SKILLS_PLACEHOLDER: 'Add a skill and press Enter',
-  RESUME_URL: 'Resume URL (optional)',
+  RESUME_URL: 'Resume URL',
   RESUME_PLACEHOLDER: 'https://...',
   CONFIRM_SUBMIT: 'Confirm and submit application',
   SUBMIT: 'Submit application',

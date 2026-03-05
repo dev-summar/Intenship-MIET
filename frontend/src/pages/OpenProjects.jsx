@@ -5,8 +5,7 @@ import { projectsAPI, alumniAPI, homepageAPI } from '../api/services';
 import { ProjectCard } from '../components/ProjectCard';
 import { useAuth } from '../context/AuthContext';
 import { PROJECTS, COMMON, ROUTES } from '../constants/messages';
-
-const CONTAINER = 'max-w-6xl mx-auto px-6';
+import './OpenProjects.css';
 
 export function OpenProjects() {
   const { user } = useAuth();
@@ -73,147 +72,133 @@ export function OpenProjects() {
     return matchSearch && matchDomain;
   });
 
+  const heroTitle = homepage?.heroTitle || PROJECTS.HERO;
+  const heroTitleParts = heroTitle.split(/(Internship)/i);
+
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-32">
-        <div className="animate-spin rounded-full h-12 w-12 border-2 border-blue-500 border-t-transparent" />
-        <span className="ml-3 text-slate-600">{COMMON.LOADING}</span>
+      <div className="open-projects-editorial">
+        <div className="editorial-loading">
+          <div className="editorial-spinner" />
+          <span className="editorial-loading-text">{COMMON.LOADING}</span>
+        </div>
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="glass glass-border rounded-2xl p-8 text-center shadow-card-light">
-        <p className="text-slate-600 mb-4">{COMMON.ERROR}</p>
-        <button
-          onClick={() => refetch()}
-          className="px-4 py-2 rounded-full text-sm font-medium text-blue-600 hover:text-blue-700 border border-slate-200 hover:border-blue-300 transition-colors duration-300"
-        >
-          {COMMON.RETRY}
-        </button>
+      <div className="open-projects-editorial">
+        <div className="editorial-error">
+          <p>{COMMON.ERROR}</p>
+          <button type="button" onClick={() => refetch()}>
+            {COMMON.RETRY}
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="relative">
-      {/* Hero + Stats + About + Alumni carousel */}
-      <section className={`bg-gradient-to-b from-white to-slate-50 py-20`}>
-        <div className={CONTAINER}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left content */}
+    <div className="open-projects-editorial relative">
+      <section className="hero-section">
+        <span className="hero-ghost" aria-hidden="true">
+          DIP
+        </span>
+        <div className="hero-grid">
           <div>
-            <p className="text-base font-semibold tracking-wide text-indigo-600">
-              {homepage?.centreName ||
-                'The Centre for Research, Innovation & Entrepreneurship Lab'}
+            <p className="hero-institution-title">
+              The Centre for Research, Innovation and Entrepreneurship (CRIE)
             </p>
-            <p className="mt-1 text-sm font-medium text-gray-600">
-              {homepage?.programName || "Director's Internship Program"}
-            </p>
-            <h1 className="mt-4 text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 leading-snug mb-4">
-              {homepage?.heroTitle || PROJECTS.HERO}
+            <div className="hero-eyebrow">
+              <span className="hero-eyebrow-line" />
+              <span className="hero-eyebrow-label">
+                {homepage?.programName || PROJECTS.HERO_LABEL}
+              </span>
+            </div>
+            <h1 className="hero-h1">
+              {heroTitleParts.map((part, i) =>
+                part.toLowerCase() === 'internship' ? (
+                  <em key={i}>{part}</em>
+                ) : (
+                  part
+                )
+              )}
             </h1>
-            <p className="text-sm text-slate-500 max-w-xl">
+            <p className="hero-subtitle">
               {homepage?.heroSubtitle || PROJECTS.HERO_SUBTITLE}
             </p>
-
-            {/* Stats grid */}
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-10 text-center sm:text-left">
-              <div className="transform transition-all duration-300 hover:scale-105">
-                <p className="text-4xl font-bold text-indigo-600">
-                  {(homepage?.liveProjects ?? projects.length) || 0}+
+            <div className="hero-stats">
+              <div className="hero-stat">
+                <p className="hero-stat-value">
+                  {(homepage?.liveProjects ?? projects.length) || 0}
+                  <sup>+</sup>
                 </p>
-                <p className="mt-2 text-sm tracking-wide text-gray-500 uppercase">
-                  Live Projects
-                </p>
+                <p className="hero-stat-label">Live Projects</p>
               </div>
-              <div className="transform transition-all duration-300 hover:scale-105">
-                <p className="text-4xl font-bold text-indigo-600">
-                  {(homepage?.interns ?? 50) || 0}+
+              <div className="hero-stat">
+                <p className="hero-stat-value">
+                  {(homepage?.interns ?? 50) || 0}
+                  <sup>+</sup>
                 </p>
-                <p className="mt-2 text-sm tracking-wide text-gray-500 uppercase">
-                  Interns
-                </p>
+                <p className="hero-stat-label">Interns</p>
               </div>
-              <div className="transform transition-all duration-300 hover:scale-105">
-                <p className="text-4xl font-bold text-indigo-600">
-                  {homepage?.domains ?? domainCount}
-                </p>
-                <p className="mt-2 text-sm tracking-wide text-gray-500 uppercase">
-                  Domains
-                </p>
+              <div className="hero-stat">
+                <p className="hero-stat-value">{homepage?.domains ?? domainCount}</p>
+                <p className="hero-stat-label">Domains</p>
               </div>
-            </div>
-
-            {/* About description */}
-            <div className="mt-8 max-w-3xl">
-              <h2 className="text-3xl font-bold text-slate-900 mb-3">
-                {homepage?.aboutTitle || PROJECTS.ABOUT_TITLE}
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                {homepage?.aboutDescription || PROJECTS.ABOUT_DESC}
-              </p>
             </div>
           </div>
 
-          {/* Right: Alumni placement carousel */}
-          <div className="mt-10 lg:mt-0">
+          <div>
             {alumni.length > 0 && !alumniLoading && (
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl border border-gray-100 p-6 transition-all duration-300 space-y-3">
-                <div className="flex items-center gap-4">
+              <div className="alumni-card">
+                <span className="alumni-card-quote" aria-hidden="true">
+                  &ldquo;
+                </span>
+                <div className="alumni-header">
                   {alumni[currentAlumni]?.imageUrl || alumni[currentAlumni]?.image_url ? (
                     <img
-                      src={alumni[currentAlumni].imageUrl || alumni[currentAlumni].image_url}
+                      src={
+                        alumni[currentAlumni].imageUrl || alumni[currentAlumni].image_url
+                      }
                       alt={alumni[currentAlumni].name}
-                      className="w-16 h-16 rounded-full object-cover"
+                      className="alumni-avatar"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = '/default-avatar.png';
                       }}
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-full bg-gray-200" />
+                    <div className="alumni-avatar-initials">
+                      {(alumni[currentAlumni].name || 'A')
+                        .split(/\s+/)
+                        .map((s) => s[0])
+                        .slice(0, 2)
+                        .join('')
+                        .toUpperCase()}
+                    </div>
                   )}
                   <div>
-                    <p className="text-base font-semibold text-gray-900">
-                      {alumni[currentAlumni].name}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {alumni[currentAlumni].branch}
-                    </p>
+                    <p className="alumni-name">{alumni[currentAlumni].name}</p>
+                    <p className="alumni-branch">{alumni[currentAlumni].branch}</p>
                   </div>
                 </div>
-
-                <div className="mt-3">
-                  <p className="text-xs font-semibold text-gray-400 uppercase">
-                    Currently placed at
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-indigo-600">
-                    {alumni[currentAlumni].company}
-                  </p>
-                </div>
-
-                <p className="mt-4 text-sm text-gray-600 leading-relaxed">
-                  {alumni[currentAlumni].testimonial}
+                <p className="alumni-placement-label">Currently placed at</p>
+                <p className="alumni-company">{alumni[currentAlumni].company}</p>
+                <p className="alumni-testimonial">
+                  &ldquo;{alumni[currentAlumni].testimonial}&rdquo;
                 </p>
-
-                <span className="mt-4 inline-block text-xs bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full">
+                <span className="alumni-tag">
                   Alumni – Director&apos;s Internship Program
                 </span>
-
-                {/* Dots */}
-                <div className="mt-6 flex justify-center gap-2">
+                <div className="alumni-dots">
                   {alumni.map((_, index) => (
                     <button
                       key={index}
                       type="button"
                       onClick={() => setCurrentAlumni(index)}
-                      className={`h-2 w-2 rounded-full transition-colors ${
-                        index === currentAlumni
-                          ? 'bg-indigo-600'
-                          : 'bg-gray-300 hover:bg-gray-400'
-                      }`}
+                      className={`alumni-dot ${index === currentAlumni ? 'active' : ''}`}
                       aria-label={`Show alumni ${index + 1}`}
                     />
                   ))}
@@ -222,50 +207,27 @@ export function OpenProjects() {
             )}
           </div>
         </div>
-        </div>
       </section>
 
-      {/* Open Projects */}
-      <section className="py-16 bg-slate-50">
-        <div className={CONTAINER}>
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-slate-900 mb-2">
-              {PROJECTS.TITLE}
-            </h2>
-            <p className="text-sm text-slate-500">
-              {PROJECTS.SUBTITLE}
-            </p>
-          </div>
+      <hr className="editorial-divider" />
 
-          {/* Not sure which project — general apply card */}
-          <div className="mb-8 rounded-2xl border border-indigo-100 bg-indigo-50 p-8 text-center shadow-sm">
-            <h3 className="text-2xl font-semibold text-gray-900">
-              Not sure which project to choose?
-            </h3>
-            <p className="mx-auto mt-3 max-w-2xl text-gray-600">
-              You can apply for general consideration and our mentors will help you find the best fit based on your skills and interests.
-            </p>
-            <Link
-              to={user ? ROUTES.APPLY_BY_PROJECT('general') : ROUTES.LOGIN}
-              state={!user ? { redirectToApply: 'general' } : undefined}
-              className="mt-6 inline-block rounded-xl bg-indigo-600 px-6 py-3 text-white transition-all duration-200 hover:bg-indigo-700"
-            >
-              Apply Now
-            </Link>
-          </div>
+      <section id="open-projects" className="projects-section">
+        <div className="projects-section-inner">
+          <h2 className="projects-section-title">{PROJECTS.TITLE}</h2>
+          <p className="projects-section-subtitle">{PROJECTS.SUBTITLE}</p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
+          <div className="filters-row">
             <input
               type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder={PROJECTS.SEARCH_PLACEHOLDER}
-              className="flex-1 rounded-xl bg-white border border-slate-200 px-4 py-2.5 text-slate-800 placeholder-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition-all duration-200 text-sm"
+              className="filter-input"
             />
             <select
               value={domainFilter}
               onChange={(e) => setDomainFilter(e.target.value)}
-              className="rounded-xl bg-white border border-slate-200 px-4 py-2.5 text-slate-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none min-w-[160px] transition-all duration-200 text-sm"
+              className="filter-select"
             >
               <option value="">{PROJECTS.FILTER_ALL}</option>
               {domains.map((d) => (
@@ -276,15 +238,30 @@ export function OpenProjects() {
             </select>
           </div>
 
+          <div className="general-apply-banner">
+            <h3 className="general-apply-title">Not sure which project to choose?</h3>
+            <p className="general-apply-desc">
+              You can apply for general consideration and our mentors will help you
+              find the best fit based on your skills and interests.
+            </p>
+            <Link
+              to={user ? ROUTES.APPLY_BY_PROJECT('general') : ROUTES.LOGIN}
+              state={!user ? { redirectToApply: 'general' } : undefined}
+              className="general-apply-cta"
+            >
+              Apply Now
+            </Link>
+          </div>
+
           {filtered.length === 0 ? (
-            <div className="bg-white rounded-xl border border-slate-200/80 p-10 text-center">
-              <p className="text-slate-800 font-medium">{PROJECTS.NO_PROJECTS}</p>
-              <p className="text-slate-500 text-sm mt-1">{PROJECTS.NO_PROJECTS_DESC}</p>
+            <div className="empty-state">
+              <p>{PROJECTS.NO_PROJECTS}</p>
+              <p>{PROJECTS.NO_PROJECTS_DESC}</p>
             </div>
           ) : (
-            <div className="projects-grid">
+            <div className="projects-grid-wrap">
               {filtered.map((project) => (
-                <div key={project._id} className="h-full min-h-[280px]">
+                <div key={project._id} className="projects-grid-cell">
                   <ProjectCard
                     project={project}
                     user={user}

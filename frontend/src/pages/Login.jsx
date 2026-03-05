@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { AUTH, ROUTES } from '../constants/messages';
 import toast from 'react-hot-toast';
+import './Login.css';
 
 export function Login() {
   const [username, setUsername] = useState('');
@@ -36,21 +37,21 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
-        {/* Branding */}
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Director&apos;s Internship
-          </h1>
-          <p className="mt-2 text-sm text-gray-500">
-            Login with your PI360 credentials
-          </p>
-        </div>
+    <div className="login-page">
+      <div className="login-card">
+        <header>
+          <h1 className="login-title">Director&apos;s Internship</h1>
+          <p className="login-subtitle">Login with your PI360 credentials</p>
+          <img
+            src="https://pi360.net/pi360_website/wordpress/wp-content/uploads/2025/12/icon-pi360.png"
+            alt="PI360"
+            className="login-logo"
+          />
+        </header>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
-          <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1.5">
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="login-field">
+            <label htmlFor="username" className="login-label">
               Email or username
             </label>
             <input
@@ -59,14 +60,14 @@ export function Login() {
               autoComplete="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="login-input"
               placeholder="Institute email or username"
               required
             />
           </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1.5">
+          <div className="login-field">
+            <label htmlFor="password" className="login-label">
               {AUTH.PASSWORD}
             </label>
             <input
@@ -75,14 +76,11 @@ export function Login() {
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="login-input"
               required
             />
-            <div className="mt-2 flex justify-end">
-              <button
-                type="button"
-                className="text-sm text-indigo-600 hover:text-indigo-700"
-              >
+            <div className="login-forgot-wrap">
+              <button type="button" className="login-forgot">
                 Forgot password?
               </button>
             </div>
@@ -91,23 +89,20 @@ export function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-xl bg-indigo-600 text-white text-sm font-medium shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transition-all duration-200"
+            className="login-submit"
           >
             {loading ? 'Signing in...' : AUTH.LOGIN}
           </button>
         </form>
 
-        <p className="mt-6 text-xs text-gray-400 text-center">
+        <p className="login-footer">
           By signing in, you agree to our Privacy Policy &amp; Terms of Use
         </p>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
-          <span>{AUTH.ADMIN_PROMPT}</span>
+        <p className="login-admin-wrap">
+          <span className="login-admin-text">{AUTH.ADMIN_PROMPT}</span>
           <br />
-          <Link
-            to={ROUTES.ADMIN_LOGIN}
-            className="mt-1 inline-block text-sm font-medium text-indigo-600 hover:text-indigo-700"
-          >
+          <Link to={ROUTES.ADMIN_LOGIN} className="login-admin-link">
             Admin login
           </Link>
         </p>

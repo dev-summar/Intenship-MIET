@@ -1,9 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { projectsAPI } from '../api/services';
-import { StatusBadge } from '../components/StatusBadge';
 import { useAuth } from '../context/AuthContext';
 import { PROJECTS, ROUTES, COMMON } from '../constants/messages';
+import './ProjectDetails.css';
 
 export function ProjectDetails() {
   const { id } = useParams();
@@ -19,89 +19,91 @@ export function ProjectDetails() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-10 w-10 border-2 border-blue-500 border-t-transparent" />
-        <span className="ml-3 text-slate-600">{COMMON.LOADING}</span>
+      <div className="project-details-page">
+        <div className="pd-loading">
+          <div className="pd-loading-spinner" />
+          <span className="pd-loading-text">{COMMON.LOADING}</span>
+        </div>
       </div>
     );
   }
 
   if (isError || !project) {
     return (
-      <div className="glass glass-border rounded-2xl p-8 text-center shadow-card-light">
-        <p className="text-slate-600 mb-4">Project not found</p>
-        <Link
-          to={ROUTES.OPEN_PROJECTS}
-          className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
-        >
-          {PROJECTS.BACK}
-        </Link>
+      <div className="project-details-page">
+        <div className="pd-error">
+          <p>Project not found</p>
+          <Link to={ROUTES.OPEN_PROJECTS}>← {PROJECTS.BACK}</Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <Link
-        to={ROUTES.OPEN_PROJECTS}
-        className="inline-flex items-center text-sm text-slate-600 hover:text-slate-900 mb-6 transition-colors"
-      >
+    <div className="project-details-page">
+      <Link to={ROUTES.OPEN_PROJECTS} className="pd-back">
         ← {PROJECTS.BACK}
       </Link>
-      <div className="glass glass-border rounded-2xl p-6 sm:p-8 shadow-card-light">
-        <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
-          <div>
-            <span className="text-sm font-medium text-blue-600 uppercase tracking-wide">
-              {project.projectCode}
-            </span>
-            <h1 className="text-2xl font-bold text-slate-900 mt-1">{project.title}</h1>
-            <p className="text-slate-600 mt-1">{project.domain}</p>
-          </div>
-          <StatusBadge status={project.status} />
-        </div>
-        <dl className="grid gap-4 sm:grid-cols-2 border-t border-slate-200 pt-6">
-          <div>
-            <dt className="text-sm font-medium text-slate-500">{PROJECTS.DURATION}</dt>
-            <dd className="mt-1 text-slate-800">{project.duration}</dd>
-          </div>
-          {project.createdBy && (
+      <div className="pd-container">
+        <div className="pd-card">
+          <div className="pd-header">
             <div>
-              <dt className="text-sm font-medium text-slate-500">{PROJECTS.CREATED_BY}</dt>
-              <dd className="mt-1 text-slate-800">
-                {project.createdBy.name} {project.createdBy.email && `(${project.createdBy.email})`}
-              </dd>
+              <span className="pd-code">{project.projectCode}</span>
+              <h1 className="pd-title">{project.title}</h1>
+              <p className="pd-domain">{project.domain}</p>
             </div>
+            <span className="pd-status">{project.status === 'open' ? PROJECTS.OPEN : PROJECTS.CLOSED}</span>
+          </div>
+
+          <hr className="pd-divider" />
+          <dl className="pd-meta">
+            <div>
+              <dt>{PROJECTS.DURATION}</dt>
+              <dd>{project.duration}</dd>
+            </div>
+            {project.createdBy && (
+              <div>
+                <dt>{PROJECTS.CREATED_BY}</dt>
+                <dd>
+                  {project.createdBy.name} {project.createdBy.email && `(${project.createdBy.email})`}
+                </dd>
+              </div>
+            )}
+          </dl>
+
+          <hr className="pd-divider" />
+          <div className="pd-section">
+            <h3 className="pd-section-title">{PROJECTS.DESCRIPTION}</h3>
+            <p className="pd-description">{project.description}</p>
+          </div>
+
+          {Array.isArray(project.requiredSkills) && project.requiredSkills.length > 0 && (
+            <>
+              <hr className="pd-divider" />
+              <div className="pd-section">
+                <h3 className="pd-section-title">{PROJECTS.SKILLS}</h3>
+                <div className="pd-skills">
+                  {project.requiredSkills.map((s, i) => (
+                    <span key={i} className="pd-skill-chip">
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </>
           )}
-        </dl>
-        <div className="mt-6 pt-6 border-t border-slate-200">
-          <h3 className="text-sm font-medium text-slate-500 mb-2">{PROJECTS.DESCRIPTION}</h3>
-          <p className="text-slate-700 whitespace-pre-wrap">{project.description}</p>
+
+          {user?.role === 'student' && project.status === 'open' && (
+            <>
+              <hr className="pd-divider" />
+              <div className="pd-section pd-apply-wrap">
+                <Link to={ROUTES.APPLY_BY_PROJECT(project._id)} className="pd-apply-btn">
+                  {PROJECTS.APPLY_NOW}
+                </Link>
+              </div>
+            </>
+          )}
         </div>
-        {Array.isArray(project.requiredSkills) && project.requiredSkills.length > 0 && (
-          <div className="mt-6 pt-6 border-t border-slate-200">
-            <h3 className="text-sm font-medium text-slate-500 mb-2">{PROJECTS.SKILLS}</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.requiredSkills.map((s, i) => (
-                <span
-                  key={i}
-                  className="inline-flex items-center rounded-lg bg-slate-100 border border-slate-200 px-3 py-1 text-sm text-slate-700"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-        {user?.role === 'student' && project.status === 'open' && (
-          <div className="mt-8 pt-6 border-t border-slate-200">
-            <Link
-              to={ROUTES.APPLY_BY_PROJECT(project._id)}
-              className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-400 hover:to-violet-400 px-5 py-2.5 text-sm font-semibold text-white shadow-glow-sm hover:shadow-glow hover:scale-105 transition-all duration-300"
-            >
-              {PROJECTS.APPLY_NOW}
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   );

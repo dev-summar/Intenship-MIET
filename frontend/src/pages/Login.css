@@ -1,0 +1,201 @@
+/* Institutional light theme – Login page */
+.login-page {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --surface2: #f3f0ea;
+  --border: #e2ddd4;
+  --text: #1a1814;
+  --muted: #6b6358;
+  --faint: #a09890;
+  --crimson: #8b1a1a;
+  --crimson-light: #a82020;
+  background: var(--surface2);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.login-page .login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--crimson);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  padding: 48px 44px;
+}
+
+.login-page .login-logo {
+  display: block;
+  margin: 0 auto 16px;
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+
+.login-page .login-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text);
+  text-align: center;
+  margin: 0;
+}
+
+.login-page .login-subtitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1814;
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+
+.login-page .login-form {
+  margin-top: 32px;
+}
+
+.login-page .login-field {
+  margin-bottom: 20px;
+}
+
+.login-page .login-label {
+  display: block;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.login-page .login-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 11px 14px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-page .login-input::placeholder {
+  color: var(--faint);
+}
+
+.login-page .login-input:focus {
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.08);
+}
+
+.login-page .login-forgot-wrap {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-page .login-forgot {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  color: var(--crimson);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: text-decoration 0.2s;
+}
+
+.login-page .login-forgot:hover {
+  text-decoration: underline;
+}
+
+.login-page .login-submit {
+  width: 100%;
+  background: var(--crimson);
+  color: #ffffff;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 13px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.login-page .login-submit:hover:not(:disabled) {
+  background: var(--crimson-light);
+  transform: translateY(-1px);
+}
+
+.login-page .login-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-page .login-footer {
+  margin-top: 24px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px;
+  color: var(--faint);
+  text-align: center;
+}
+
+.login-page .login-footer a {
+  color: var(--crimson);
+  text-decoration: none;
+}
+
+.login-page .login-footer a:hover {
+  text-decoration: underline;
+}
+
+.login-page .login-admin-wrap {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.login-page .login-admin-text {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.login-page .login-admin-link {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--crimson);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 4px;
+  transition: text-decoration 0.2s;
+}
+
+.login-page .login-admin-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-page .login-card {
+    padding: 32px 24px;
+  }
+
+  .login-page .login-title {
+    font-size: 24px;
+  }
+}

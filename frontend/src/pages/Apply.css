@@ -1,0 +1,349 @@
+/* Apply page — institutional light theme */
+.apply-page {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --surface2: #f3f0ea;
+  --border: #e2ddd4;
+  --text: #1a1814;
+  --muted: #6b6358;
+  --faint: #a09890;
+  --crimson: #8b1a1a;
+  --crimson-light: #a82020;
+  --crimson-bg: #fdf5f5;
+  --gold: #b5862a;
+  --gold-bg: #fdf8ee;
+
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  color: var(--text);
+}
+
+/* Back link */
+.apply-back-link {
+  display: inline-block;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  padding: 28px 0 0 56px;
+  text-decoration: none;
+  background: none;
+}
+.apply-back-link:hover {
+  color: var(--crimson);
+}
+
+/* Two-column layout */
+.apply-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 56px;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .apply-container {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 40px;
+  }
+  .apply-back-link {
+    padding: 20px 0 0 20px;
+  }
+}
+
+/* General apply notice */
+.apply-general-notice {
+  grid-column: 1 / -1;
+  background: var(--gold-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  padding: 14px 18px;
+  margin-bottom: 0;
+}
+.apply-general-notice p:first-child {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 4px 0;
+}
+.apply-general-notice p:last-child {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Project summary card (right column, or top on mobile) */
+.apply-summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--crimson);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 28px;
+}
+.apply-summary-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.apply-summary-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.apply-summary-meta {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+}
+.apply-summary-divider {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 12px 0 0 0;
+}
+.apply-summary-desc {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+/* Application form card (left column) */
+.apply-form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--crimson);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 36px 40px;
+}
+.apply-form-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.apply-form-subtitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Form fields */
+.apply-field label {
+  display: block;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.apply-input,
+.apply-textarea {
+  width: 100%;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 11px 14px;
+  box-sizing: border-box;
+}
+.apply-input::placeholder,
+.apply-textarea::placeholder {
+  color: var(--faint);
+}
+.apply-input:focus,
+.apply-textarea:focus {
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.08);
+  outline: none;
+}
+.apply-textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+.apply-input-disabled {
+  background: var(--surface2);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* TagsInput wrapper — match form input styling (targets TagsInput’s root div and children) */
+.apply-tags-wrap {
+  width: 100%;
+}
+.apply-tags-wrap > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  padding: 11px 14px;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+.apply-tags-wrap > div:focus-within {
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.08);
+  outline: none;
+}
+.apply-tags-wrap input {
+  min-width: 120px;
+  flex: 1;
+  border: 0;
+  padding: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: transparent;
+}
+.apply-tags-wrap input::placeholder {
+  color: var(--faint);
+}
+.apply-tags-wrap input:focus {
+  outline: none;
+}
+.apply-tags-wrap > div > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--crimson-bg);
+  color: var(--crimson);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  padding: 4px 10px;
+}
+.apply-tags-wrap > div > span > button {
+  background: none;
+  border: 0;
+  color: var(--crimson);
+  cursor: pointer;
+  padding: 0 0 0 4px;
+  font-size: 16px;
+  line-height: 1;
+}
+.apply-tags-wrap > div > span > button:hover {
+  color: var(--crimson-light);
+}
+
+/* Submit button */
+.apply-submit {
+  background: var(--crimson);
+  color: #ffffff;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 13px 36px;
+  border: none;
+  width: auto;
+  cursor: pointer;
+}
+.apply-submit:hover:not(:disabled) {
+  background: var(--crimson-light);
+  transform: translateY(-1px);
+}
+.apply-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success / error states (inline messages) */
+.apply-message-success {
+  background: #f0fdf4;
+  border-left: 3px solid #2d7a3a;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: #1a3d22;
+  padding: 14px 18px;
+}
+.apply-message-error {
+  background: var(--crimson-bg);
+  border-left: 3px solid var(--crimson);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: var(--crimson);
+  padding: 14px 18px;
+}
+
+/* Loading and error pages (no project / closed) */
+.apply-loading-wrap,
+.apply-error-card {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 56px;
+}
+.apply-loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 40vh;
+  color: var(--muted);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+}
+.apply-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  border-top-color: var(--crimson);
+  border-radius: 50%;
+  animation: apply-spin 0.8s linear infinite;
+}
+@keyframes apply-spin {
+  to { transform: rotate(360deg); }
+}
+.apply-error-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--crimson);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  padding: 36px 40px;
+  text-align: center;
+}
+.apply-error-card p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: var(--muted);
+  margin: 0 0 16px 0;
+}
+.apply-error-card a {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+.apply-error-card a:hover {
+  color: var(--crimson);
+}
+
+/* Mobile: summary first, then form */
+@media (max-width: 900px) {
+  .apply-container {
+    grid-template-columns: 1fr;
+  }
+  .apply-summary-first {
+    order: -1;
+  }
+}

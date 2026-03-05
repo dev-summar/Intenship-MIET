@@ -1,0 +1,356 @@
+/* Institutional light theme – Project Details page */
+.project-details-page {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --surface2: #f3f0ea;
+  --border: #e2ddd4;
+  --border-strong: #c8c0b0;
+  --text: #1a1814;
+  --muted: #6b6358;
+  --faint: #a09890;
+  --crimson: #8b1a1a;
+  --crimson-light: #a82020;
+  --crimson-bg: #fdf5f5;
+  --gold: #b5862a;
+  --gold-bg: #fdf8ee;
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: var(--text);
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.project-details-page *,
+.project-details-page *::before,
+.project-details-page *::after {
+  box-sizing: inherit;
+}
+
+.project-details-page .pd-back {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  margin: 32px 0 24px;
+  padding-left: 56px;
+  transition: color 0.2s;
+}
+
+.project-details-page .pd-back:hover {
+  color: var(--crimson);
+}
+
+.project-details-page .pd-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 56px 48px;
+}
+
+.project-details-page .pd-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--crimson);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+  padding: 48px 56px;
+}
+
+/* Header */
+.project-details-page .pd-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.project-details-page .pd-code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.project-details-page .pd-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.project-details-page .pd-domain {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.project-details-page .pd-status {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--crimson);
+  background: var(--crimson-bg);
+  border: 1px solid rgba(139, 26, 26, 0.2);
+  padding: 6px 12px;
+  border-radius: 0;
+}
+
+/* Divider */
+.project-details-page .pd-divider {
+  height: 1px;
+  background: var(--border);
+  border: none;
+  margin: 0;
+}
+
+/* Meta row */
+.project-details-page .pd-meta {
+  display: grid;
+  gap: 16px 24px;
+  grid-template-columns: 1fr 1fr;
+  padding: 24px 0;
+}
+
+.project-details-page .pd-meta dt {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+  margin: 0 0 4px 0;
+}
+
+.project-details-page .pd-meta dd {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+}
+
+/* Description */
+.project-details-page .pd-section {
+  padding: 24px 0;
+}
+
+.project-details-page .pd-section-title {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+  margin: 0 0 12px 0;
+}
+
+.project-details-page .pd-description {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Skills */
+.project-details-page .pd-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.project-details-page .pd-skill-chip {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+  background: var(--gold-bg);
+  border: 1px solid rgba(181, 134, 42, 0.25);
+  padding: 5px 14px;
+  border-radius: 0;
+}
+
+/* Apply button */
+.project-details-page .pd-apply-wrap {
+  padding-top: 24px;
+}
+
+.project-details-page .pd-apply-btn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--crimson);
+  color: white;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 13px 32px;
+  border-radius: 0;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.project-details-page .pd-apply-btn:hover {
+  background: var(--crimson-light);
+  transform: translateY(-1px);
+}
+
+/* Loading */
+.project-details-page .pd-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+}
+
+.project-details-page .pd-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--border);
+  border-top-color: var(--crimson);
+  border-radius: 50%;
+  animation: pd-spin 0.8s linear infinite;
+}
+
+.project-details-page .pd-loading-text {
+  margin-left: 12px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+@keyframes pd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error state */
+.project-details-page .pd-error {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 48px 56px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  text-align: center;
+}
+
+.project-details-page .pd-error p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.project-details-page .pd-error a {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.project-details-page .pd-error a:hover {
+  color: var(--crimson);
+}
+
+/* Mobile-friendly */
+@media (max-width: 768px) {
+  .project-details-page .pd-back {
+    padding-left: 20px;
+    margin: 20px 0 16px;
+  }
+
+  .project-details-page .pd-container {
+    padding: 0 20px 32px;
+  }
+
+  .project-details-page .pd-card {
+    padding: 28px 20px 24px;
+  }
+
+  .project-details-page .pd-title {
+    font-size: 26px;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .project-details-page .pd-header {
+    margin-bottom: 20px;
+    gap: 12px;
+  }
+
+  .project-details-page .pd-meta {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px 0;
+  }
+
+  .project-details-page .pd-section {
+    padding: 20px 0;
+  }
+
+  .project-details-page .pd-apply-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    padding: 14px 24px;
+  }
+
+  .project-details-page .pd-apply-wrap {
+    padding-top: 20px;
+  }
+
+  .project-details-page .pd-error {
+    padding: 28px 20px;
+    margin: 0 20px;
+    max-width: none;
+  }
+
+  .project-details-page .pd-loading {
+    padding: 60px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-details-page .pd-back {
+    padding-left: 16px;
+    margin: 16px 0 12px;
+  }
+
+  .project-details-page .pd-container {
+    padding: 0 16px 24px;
+  }
+
+  .project-details-page .pd-card {
+    padding: 24px 16px 20px;
+  }
+
+  .project-details-page .pd-title {
+    font-size: 22px;
+  }
+
+  .project-details-page .pd-code {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+}

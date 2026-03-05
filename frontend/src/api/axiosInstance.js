@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { ROUTES } from '../constants/messages';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
+const basePath = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
 if (!baseURL) {
   console.warn('VITE_API_BASE_URL is not set. API calls may fail.');
@@ -33,8 +35,11 @@ axiosInstance.interceptors.response.use(
     if (status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {
-        window.location.href = '/login';
+      const loginPath = `${basePath}${ROUTES.LOGIN}`;
+      const registerPath = `${basePath}${ROUTES.REGISTER}`;
+      const pathname = window.location.pathname;
+      if (!pathname.includes(ROUTES.LOGIN) && !pathname.includes(ROUTES.REGISTER)) {
+        window.location.href = loginPath;
       }
     }
 

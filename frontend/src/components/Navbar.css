@@ -1,0 +1,278 @@
+/* Institutional light theme – same tokens as OpenProjects */
+.navbar-institutional {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --border: #e2ddd4;
+  --text: #1a1814;
+  --muted: #6b6358;
+  --crimson: #8b1a1a;
+  --crimson-light: #a82020;
+  --gold: #b5862a;
+}
+
+.navbar-institutional {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-top: 3px solid var(--crimson);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+  padding: 0 56px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  /* For dropdown positioning */
+  isolation: isolate;
+}
+
+.navbar-institutional .navbar-left-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.navbar-institutional .navbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left — Logo + wordmark */
+.navbar-institutional .navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+
+.navbar-institutional .navbar-logo {
+  height: 36px;
+  width: auto;
+  max-width: 100px;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+}
+
+.navbar-institutional .navbar-divider {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.navbar-institutional .navbar-wordmark-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.navbar-institutional .navbar-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/* Right — Auth */
+.navbar-institutional .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-institutional .navbar-login-btn {
+  background: var(--crimson);
+  color: white;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.navbar-institutional .navbar-login-btn:hover {
+  background: var(--crimson-light);
+}
+
+.navbar-institutional .navbar-user-name {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.navbar-institutional .navbar-dashboard-link {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  color: var(--crimson);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.navbar-institutional .navbar-dashboard-link:hover {
+  border-bottom-color: var(--crimson);
+}
+
+.navbar-institutional .navbar-logout-btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.navbar-institutional .navbar-logout-btn:hover {
+  color: var(--crimson);
+}
+
+/* Hamburger — hidden on desktop */
+.navbar-institutional .navbar-hamburger {
+  display: none;
+  width: 24px;
+  height: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.navbar-institutional .navbar-hamburger span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+}
+
+/* Mobile dropdown */
+.navbar-institutional .navbar-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 30;
+}
+
+.navbar-institutional .navbar-dropdown.open {
+  display: flex;
+}
+
+.navbar-institutional .navbar-dropdown a,
+.navbar-institutional .navbar-dropdown .navbar-dropdown-login {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 10px 0;
+  transition: color 0.2s;
+}
+
+.navbar-institutional .navbar-dropdown a:hover {
+  color: var(--crimson);
+}
+
+.navbar-institutional .navbar-dropdown .navbar-dropdown-login {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  background: var(--crimson);
+  color: white;
+  padding: 10px 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 0;
+}
+
+.navbar-institutional .navbar-dropdown .navbar-dropdown-login:hover {
+  background: var(--crimson-light);
+}
+
+.navbar-institutional .navbar-dropdown-logout {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 0;
+  width: 100%;
+  text-align: left;
+  transition: color 0.2s;
+}
+
+.navbar-institutional .navbar-dropdown-logout:hover {
+  color: var(--crimson);
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .navbar-institutional {
+    padding: 0 20px;
+  }
+
+  .navbar-institutional .navbar-hamburger {
+    display: flex;
+  }
+
+  .navbar-institutional .navbar-right > .navbar-user-name,
+  .navbar-institutional .navbar-right > .navbar-dashboard-link,
+  .navbar-institutional .navbar-right > .navbar-logout-btn,
+  .navbar-institutional .navbar-right > .navbar-login-btn {
+    display: none;
+  }
+
+  .navbar-institutional .navbar-right-mobile-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar-institutional .navbar-right-mobile-cta {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-institutional .navbar-wordmark {
+    font-size: 15px;
+  }
+}
